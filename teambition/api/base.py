@@ -7,22 +7,22 @@ class TeambitionAPI(object):
     def __init__(self, client):
         self._client = client
 
-    def get(self, url, **kwargs):
+    def _get(self, url, **kwargs):
         if getattr(self, 'API_BASE_URL', None):
             kwargs['api_base_url'] = self.API_BASE_URL
         return self._client.get(url, **kwargs)
 
-    def post(self, url, **kwargs):
+    def _post(self, url, **kwargs):
         if getattr(self, 'API_BASE_URL', None):
             kwargs['api_base_url'] = self.API_BASE_URL
         return self._client.post(url, **kwargs)
 
-    def put(self, url, **kwargs):
+    def _put(self, url, **kwargs):
         if getattr(self, 'API_BASE_URL', None):
             kwargs['api_base_url'] = self.API_BASE_URL
         return self._client.put(url, **kwargs)
 
-    def delete(self, url, **kwargs):
+    def _delete(self, url, **kwargs):
         if getattr(self, 'API_BASE_URL', None):
             kwargs['api_base_url'] = self.API_BASE_URL
         return self._client.delete(url, **kwargs)

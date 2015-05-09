@@ -22,6 +22,7 @@ class Teambition(object):
         weak_self = weakref.proxy(self)
         # API endpoints
         self.oauth = api.TeambitionOAuth(self)
+        self.projects = api.TeambitionProjects(self)
 
     def _request(self, method, endpoint, **kwargs):
         if not endpoint.startswith(('http://', 'https://')):

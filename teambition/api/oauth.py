@@ -9,6 +9,14 @@ from teambition.api.base import TeambitionAPI
 class TeambitionOAuth(TeambitionAPI):
 
     def get_authorize_url(self, redirect_uri, state='', lang='zh'):
+        """
+        获取授权地址
+
+        :param redirect_uri: 授权回调地址
+        :param state: 原样返回给客户端
+        :param lang: 语言类型，可选 zh, en，默认为 zh
+        :return: 授权地址
+        """
         oauth2_url = furl('https://account.teambition.com/oauth2/authorize')
         oauth2_url.add(args={
             'client_id': self.client_id,
@@ -19,7 +27,13 @@ class TeambitionOAuth(TeambitionAPI):
         return oauth2_url.url
 
     def fetch_access_token(self, code, grant_type='code'):
-        res = self.post(
+        """
+        根据 code 获取 access_token
+        :param code: 授权完成返回的 code 参数值
+        :param grant_type: 固定值为 code
+        :return: access_token 值
+        """
+        res = self._post(
             'oauth2/access_token',
             data={
                 'client_id': self.client_id,
