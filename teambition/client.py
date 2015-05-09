@@ -23,6 +23,7 @@ class Teambition(object):
         # API endpoints
         self.oauth = api.TeambitionOAuth(self)
         self.projects = api.TeambitionProjects(self)
+        self.tasklists = api.TeambitionTasklists(self)
 
     def _request(self, method, endpoint, **kwargs):
         if not endpoint.startswith(('http://', 'https://')):
