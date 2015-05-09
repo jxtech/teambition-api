@@ -11,6 +11,7 @@ Welcome to teambition-api's documentation!
    :maxdepth: 2
 
    oauth
+   users
    projects
    tasklists
    stages
