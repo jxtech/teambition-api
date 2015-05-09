@@ -12,6 +12,7 @@ Welcome to teambition-api's documentation!
 
    oauth
    users
+   organizations
    projects
    tasklists
    stages

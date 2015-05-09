@@ -27,6 +27,7 @@ class Teambition(object):
         self.stages = api.TeambitionStages(self)
         self.tasks = api.TeambitionTasks(self)
         self.users = api.TeambitionUsers(self)
+        self.organizations = api.TeambitionOrganizations(self)
 
     def _request(self, method, endpoint, **kwargs):
         if not endpoint.startswith(('http://', 'https://')):
