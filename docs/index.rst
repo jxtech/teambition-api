@@ -13,9 +13,11 @@ Welcome to teambition-api's documentation!
    oauth
    users
    organizations
+   teams
    projects
    tasklists
    stages
+   stagetemplates
    tasks
 
 
