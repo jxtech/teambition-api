@@ -11,10 +11,20 @@ from teambition import api
 
 
 class Teambition(object):
+    """
+    Teambition API 客户端
+    """
 
     API_BASE_URL = 'https://api.teambition.com/'
 
     def __init__(self, client_id, client_secret, access_token=None):
+        """
+        初始化 Teambition API Client
+
+        :param client_id: 申请应用时分配的 client_id
+        :param client_secret: 申请应用时分配的 client_secret
+        :param access_token: 可选，access_token
+        """
         self.client_id = client_id
         self.client_secret = client_secret
         self._access_token = access_token
@@ -79,8 +89,18 @@ class Teambition(object):
 
     @property
     def access_token(self):
+        """
+        获取 access_token
+
+        :return: access_token
+        """
         return self._access_token
 
     @access_token.setter
     def access_token(self, token):
+        """
+        设置 access_token
+
+        :param token: access_token
+        """
         self._access_token = token

@@ -10,6 +10,7 @@ Welcome to teambition-api's documentation!
 .. toctree::
    :maxdepth: 2
 
+   client
    oauth
    users
    organizations
