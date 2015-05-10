@@ -7,10 +7,19 @@ Welcome to teambition-api's documentation!
 ==========================================
 
 
+基本用法
+
 .. toctree::
    :maxdepth: 2
 
    client
+
+
+详细接口说明
+
+.. toctree::
+   :maxdepth: 2
+
    oauth
    users
    organizations

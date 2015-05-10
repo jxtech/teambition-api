@@ -1,4 +1,4 @@
-Teambition API 客户端
+Teambition Client
 =========================
 
 .. module:: teambition.client
