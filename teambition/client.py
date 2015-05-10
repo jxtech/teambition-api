@@ -32,14 +32,23 @@ class Teambition(object):
         weak_self = weakref.proxy(self)
         # API endpoints
         self.oauth = api.OAuth(weak_self)
+        """OAuth2 接口"""
         self.projects = api.Projects(weak_self)
+        """项目接口"""
         self.tasklists = api.Tasklists(weak_self)
+        """任务分组接口"""
         self.stages = api.Stages(weak_self)
+        """任务阶段接口"""
         self.tasks = api.Tasks(weak_self)
+        """任务接口"""
         self.users = api.Users(weak_self)
+        """用户接口"""
         self.organizations = api.Organizations(weak_self)
+        """组织接口"""
         self.stagetemplates = api.StageTemplates(weak_self)
+        """阶段目标接口"""
         self.teams = api.Teams(weak_self)
+        """团队接口"""
 
     def _request(self, method, endpoint, **kwargs):
         if not endpoint.startswith(('http://', 'https://')):
