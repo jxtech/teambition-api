@@ -6,7 +6,7 @@ from furl import furl
 from teambition.api.base import TeambitionAPI
 
 
-class TeambitionOAuth(TeambitionAPI):
+class OAuth(TeambitionAPI):
 
     def get_authorize_url(self, redirect_uri, state='', lang='zh'):
         """

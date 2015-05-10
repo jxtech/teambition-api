@@ -5,7 +5,7 @@ from optionaldict import optionaldict
 from teambition.api.base import TeambitionAPI
 
 
-class TeambitionProjects(TeambitionAPI):
+class Projects(TeambitionAPI):
 
     def get(self, id=None, is_archived=False):
         """

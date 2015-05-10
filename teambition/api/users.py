@@ -5,7 +5,7 @@ from optionaldict import optionaldict
 from teambition.api.base import TeambitionAPI
 
 
-class TeambitionUsers(TeambitionAPI):
+class Users(TeambitionAPI):
 
     def me(self):
         """
