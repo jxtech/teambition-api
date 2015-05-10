@@ -1,4 +1,4 @@
-Teambition OAuth2 接口
+OAuth2 接口
 =========================
 
 .. module:: teambition.api.oauth

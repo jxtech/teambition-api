@@ -1,4 +1,4 @@
-Teambition 项目接口
+项目接口
 ======================
 
 .. module:: teambition.api.projects
