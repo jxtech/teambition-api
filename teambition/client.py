@@ -57,6 +57,8 @@ class Teambition(object):
         """:doc:`posts`"""
         self.collections = api.Collections(weak_self)
         """:doc:`collections`"""
+        self.works = api.Works(weak_self)
+        """:doc:`works`"""
 
     def _request(self, method, endpoint, **kwargs):
         if not endpoint.startswith(('http://', 'https://')):

@@ -36,6 +36,7 @@ Welcome to teambition-api's documentation!
    messages
    posts
    collections
+   works
 
 
 
