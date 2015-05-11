@@ -14,6 +14,7 @@ from teambition.api.messages import Messages  # NOQA
 from teambition.api.posts import Posts  # NOQA
 from teambition.api.collections import Collections  # NOQA
 from teambition.api.works import Works  # NOQA
+from teambition.api.events import Events  # NOQA
 
 __all__ = [
     'OAuth',
@@ -30,4 +31,5 @@ __all__ = [
     'Posts',
     'Collections',
     'Works',
+    'Events',
 ]

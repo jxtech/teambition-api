@@ -37,6 +37,7 @@ Welcome to teambition-api's documentation!
    posts
    collections
    works
+   events
 
 
 

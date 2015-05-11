@@ -8,6 +8,7 @@ except ImportError:
 import requests
 
 from teambition import api
+from teambition.utils import JSONEncoder
 
 
 class Teambition(object):
@@ -59,6 +60,8 @@ class Teambition(object):
         """:doc:`collections`"""
         self.works = api.Works(weak_self)
         """:doc:`works`"""
+        self.events = api.Events(weak_self)
+        """:doc:`events`"""
 
     def _request(self, method, endpoint, **kwargs):
         if not endpoint.startswith(('http://', 'https://')):
@@ -75,7 +78,11 @@ class Teambition(object):
         if 'access_token' not in kwargs['params'] and self.access_token:
             kwargs['params']['access_token'] = self.access_token
         if isinstance(kwargs.get('data', ''), dict):
-            body = json.dumps(kwargs['data'], ensure_ascii=False)
+            body = json.dumps(
+                kwargs['data'],
+                ensure_ascii=False,
+                cls=JSONEncoder
+            )
             body = body.encode('utf-8')
             kwargs['data'] = body
 
