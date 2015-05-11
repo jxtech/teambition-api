@@ -8,6 +8,7 @@ Welcome to teambition-api's documentation!
 
 
 基本用法
+-----------
 
 .. toctree::
    :maxdepth: 2
@@ -16,6 +17,7 @@ Welcome to teambition-api's documentation!
 
 
 详细接口说明
+----------------
 
 .. toctree::
    :maxdepth: 2
@@ -32,6 +34,7 @@ Welcome to teambition-api's documentation!
    subtasks
    messages
    posts
+   collections
 
 
 

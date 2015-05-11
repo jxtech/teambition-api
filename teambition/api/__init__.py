@@ -12,6 +12,7 @@ from teambition.api.teams import Teams  # NOQA
 from teambition.api.subtasks import Subtasks  # NOQA
 from teambition.api.messages import Messages  # NOQA
 from teambition.api.posts import Posts  # NOQA
+from teambition.api.collections import Collections  # NOQA
 
 __all__ = [
     'OAuth',
@@ -26,4 +27,5 @@ __all__ = [
     'Subtasks',
     'Messages',
     'Posts',
+    'Collections',
 ]
