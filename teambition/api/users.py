@@ -41,3 +41,50 @@ class Users(TeambitionAPI):
             'api/users',
             data=data
         )
+
+    def add_email(self, email):
+        """
+        添加新邮箱
+
+        :param email: 邮箱地址
+        :return: 返回的 JSON 数据包
+        """
+        return self._post(
+            'api/users/email',
+            data={
+                'email': email
+            }
+        )
+
+    def update_preferences(self, id, notification):
+        """
+        更新通知设置
+
+        :param id: 用户 ID
+        :param notification: 新通知设置，dict 类型
+        :return: 返回的 JSON 数据包
+        """
+        return self._put(
+            'api/preferences/{0}'.format(id),
+            data={
+                'notification': notification
+            }
+        )
+
+    def send_verification_email(self, email_id):
+        """
+        发送邮箱验证邮件
+
+        :param email_id: 邮箱唯一标识 ID，可以从 emails 属性中获得
+        :return: 返回的 JSON 数据包
+        """
+        return self._post('api/users/email/{0}/send'.format(email_id))
+
+    def delete_email(self, email_id):
+        """
+        删除关联邮箱
+
+        :param email_id: 邮箱唯一标识 ID，可以从 emails 属性中获得
+        :return: 返回的 JSON 数据包
+        """
+        return self._delete('api/users/email/{0}/send'.format(email_id))
