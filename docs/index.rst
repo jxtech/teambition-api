@@ -30,6 +30,7 @@ Welcome to teambition-api's documentation!
    stagetemplates
    tasks
    subtasks
+   messages
 
 
 
