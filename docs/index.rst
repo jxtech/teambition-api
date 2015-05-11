@@ -31,6 +31,7 @@ Welcome to teambition-api's documentation!
    tasks
    subtasks
    messages
+   posts
 
 
 

@@ -124,3 +124,12 @@ class Projects(TeambitionAPI):
             'api/projects/{0}/copy'.format(id),
             data=data
         )
+
+    def get_posts(self, id):
+        """
+        获取项目分享列表
+
+        :param id: 项目 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._get('api/projects/{0}/posts'.format(id))

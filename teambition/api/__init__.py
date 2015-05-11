@@ -11,6 +11,7 @@ from teambition.api.stagetemplates import StageTemplates  # NOQA
 from teambition.api.teams import Teams  # NOQA
 from teambition.api.subtasks import Subtasks  # NOQA
 from teambition.api.messages import Messages  # NOQA
+from teambition.api.posts import Posts  # NOQA
 
 __all__ = [
     'OAuth',
@@ -24,4 +25,5 @@ __all__ = [
     'Teams',
     'Subtasks',
     'Messages',
+    'Posts',
 ]
