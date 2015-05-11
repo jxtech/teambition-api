@@ -29,6 +29,7 @@ class OAuth(TeambitionAPI):
     def fetch_access_token(self, code, grant_type='code'):
         """
         根据 code 获取 access_token
+
         :param code: 授权完成返回的 code 参数值
         :param grant_type: 固定值为 code
         :return: access_token 值
