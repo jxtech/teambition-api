@@ -199,3 +199,12 @@ class Tasks(TeambitionAPI):
                 'tagIds': tag_ids
             }
         )
+
+    def get_subtasks(self, id):
+        """
+        获取子任务列表
+
+        :param id: 任务 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._get('api/tasks/{0}/subtasks'.format(id))

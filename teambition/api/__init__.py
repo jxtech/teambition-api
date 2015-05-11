@@ -9,6 +9,7 @@ from teambition.api.users import Users  # NOQA
 from teambition.api.organizations import Organizations  # NOQA
 from teambition.api.stagetemplates import StageTemplates  # NOQA
 from teambition.api.teams import Teams  # NOQA
+from teambition.api.subtasks import Subtasks  # NOQA
 
 __all__ = [
     'OAuth',
@@ -20,4 +21,5 @@ __all__ = [
     'Organizations',
     'StageTemplates',
     'Teams',
+    'Subtasks',
 ]

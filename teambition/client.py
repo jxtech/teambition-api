@@ -49,6 +49,8 @@ class Teambition(object):
         """:doc:`stagetemplates`"""
         self.teams = api.Teams(weak_self)
         """:doc:`teams`"""
+        self.subtasks = api.Subtasks(weak_self)
+        """:doc:`subtasks`"""
 
     def _request(self, method, endpoint, **kwargs):
         if not endpoint.startswith(('http://', 'https://')):

@@ -29,6 +29,7 @@ Welcome to teambition-api's documentation!
    stages
    stagetemplates
    tasks
+   subtasks
 
 
 
