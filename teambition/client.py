@@ -8,7 +8,7 @@ except ImportError:
 import requests
 
 from teambition import api
-from teambition.utils import JSONEncoder
+from teambition.utils import JSONEncoder, JSONDecoder
 
 
 class Teambition(object):
@@ -98,7 +98,7 @@ class Teambition(object):
             **kwargs
         )
         res.raise_for_status()
-        result = res.json()
+        result = res.json(cls=JSONDecoder)
         return result
 
     def get(self, endpoint, **kwargs):
