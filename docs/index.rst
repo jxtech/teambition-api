@@ -38,6 +38,7 @@ Welcome to teambition-api's documentation!
    collections
    works
    events
+   tags
 
 
 

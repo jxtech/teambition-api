@@ -62,6 +62,8 @@ class Teambition(object):
         """:doc:`works`"""
         self.events = api.Events(weak_self)
         """:doc:`events`"""
+        self.tags = api.Tags(weak_self)
+        """:doc:`tags`"""
 
     def _request(self, method, endpoint, **kwargs):
         if not endpoint.startswith(('http://', 'https://')):

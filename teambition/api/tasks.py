@@ -208,3 +208,37 @@ class Tasks(TeambitionAPI):
         :return: 返回的 JSON 数据包
         """
         return self._get('api/tasks/{0}/subtasks'.format(id))
+
+    def get_tags(self, id):
+        """
+        获取任务标签列表
+
+        :param id: 任务 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._get('api/tasks/{0}/tags'.format(id))
+
+    def create_tag(self, id, name):
+        """
+        新建标签
+
+        :param id: 任务 ID
+        :param name: 标签名称
+        :return: 返回的 JSON 数据包
+        """
+        return self._post(
+            'api/tasks/{0}/tags'.format(id),
+            data={
+                'name': name
+            }
+        )
+
+    def add_tag(self, id, tag_id):
+        """
+        关联标签
+
+        :param id: 任务 ID
+        :param tag_id: 标签 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._put('api/tasks/{0}/tags/{1}'.format(id, tag_id))

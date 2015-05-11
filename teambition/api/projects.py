@@ -133,3 +133,12 @@ class Projects(TeambitionAPI):
         :return: 返回的 JSON 数据包
         """
         return self._get('api/projects/{0}/posts'.format(id))
+
+    def get_tags(self, id):
+        """
+        获取项目标签列表
+
+        :param id: 项目 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._get('api/projects/{0}/tags'.format(id))
