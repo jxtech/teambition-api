@@ -158,3 +158,12 @@ class Works(TeambitionAPI):
         :return: 返回的 JSON 数据包
         """
         return self._put('api/works/{0}/tags/{1}'.format(id, tag_id))
+
+    def get_objectlinks(self, id):
+        """
+        获取文件关联的 objectlink 列表
+
+        :param id: 文件 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._get('api/works/{0}/objectlinks'.format(id))
