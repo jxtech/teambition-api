@@ -88,8 +88,8 @@ class Teambition(object):
             body = body.encode('utf-8')
             kwargs['data'] = body
 
-        if 'header' not in kwargs:
-            kwargs['header'] = {
+        if 'headers' not in kwargs:
+            kwargs['headers'] = {
                 'Content-Type': 'application/json',
                 'Authorization': 'OAuth2 {0}'.format(self.access_token),
             }
