@@ -88,3 +88,32 @@ class Users(TeambitionAPI):
         :return: 返回的 JSON 数据包
         """
         return self._delete('api/users/email/{0}/send'.format(email_id))
+
+    def get_my_tasks(self, page=1, count=30):
+        """
+        获取执行者为我的任务
+
+        :param page: 可选，当前页码
+        :param count: 可选，每页数量，默认为 30
+        :return: 返回的 JSON 数据包
+        """
+        return self._get('api/tasks/me')
+
+    def get_involved_tasks(self, page=1, count=30):
+        """
+        获取我参与的任务
+
+        :param page: 可选，当前页码
+        :param count: 可选，每页数量，默认为 30
+        :return: 返回的 JSON 数据包
+        """
+        return self._get('api/tasks/involves')
+
+    def get_today_count(self):
+        """
+        获取今日待处理事项总数
+
+        :return: 今日待处理事项数量
+        """
+        res = self._get('api/users/todayCount')
+        return res['todayCount']
