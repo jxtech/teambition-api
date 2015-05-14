@@ -46,3 +46,22 @@ class OAuth(TeambitionAPI):
         token = res['access_token']
         self._client._access_token = token
         return token
+
+    def check(self, access_token=None):
+        """
+        验证 access_token 是否合法
+
+        :param access_token: 可选，access_token
+        :return: 返回的 JSON 数据包
+        """
+        headers = {
+            'access_token': access_token or self.access_token,
+        }
+        try:
+            res = self._get(
+                'api/applications/{0}/tokens/check'.format(self.client_id),
+                headers=headers
+            )
+        except requests.HTTPError:
+            return False
+        return True
