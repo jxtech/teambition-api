@@ -11,10 +11,15 @@ class Posts(TeambitionAPI):
         """
         获取分享列表
 
+        详情请参考
+        http://docs.teambition.com/wiki/posts#posts-get
+
         :param id: 可选，分享 ID
         :param project_id: 可选，项目 ID
         :return: 返回的 JSON 数据包
         """
+        assert id or project_id
+
         if id:
             endpoint = 'api/posts/{0}'.format(id)
         elif project_id:
@@ -26,6 +31,9 @@ class Posts(TeambitionAPI):
                tag_ids=None, attachments=None):
         """
         新建分享
+
+        详情请参考
+        http://docs.teambition.com/wiki/posts#posts-create
 
         :param project_id: 项目 ID
         :param title: 标题
@@ -56,6 +64,9 @@ class Posts(TeambitionAPI):
         """
         删除分享
 
+        详情请参考
+        http://docs.teambition.com/wiki/posts#posts-delete
+
         :param id: 分享 ID
         :return: 返回的 JSON 数据包
         """
@@ -65,6 +76,9 @@ class Posts(TeambitionAPI):
                attachments=None, pin=None):
         """
         更新分享
+
+        详情请参考
+        http://docs.teambition.com/wiki/posts#posts-update
 
         :param id: 分享 ID
         :param title: 可选，标题
@@ -90,6 +104,9 @@ class Posts(TeambitionAPI):
         """
         赞分享
 
+        详情请参考
+        http://docs.teambition.com/wiki/posts#posts-like
+
         :param id: 分享 ID
         :return: 返回的 JSON 数据包
         """
@@ -98,6 +115,9 @@ class Posts(TeambitionAPI):
     def update_members(self, id, members):
         """
         更新分享参与者
+
+        详情请参考
+        http://docs.teambition.com/wiki/posts#posts-update-involvemembers
 
         :param id: 分享 ID
         :param members: 参与者 ID 列表
@@ -114,6 +134,9 @@ class Posts(TeambitionAPI):
         """
         归档分享
 
+        详情请参考
+        http://docs.teambition.com/wiki/posts#posts-archive
+
         :param id: 分享 ID
         :return: 返回的 JSON 数据包
         """
@@ -123,6 +146,9 @@ class Posts(TeambitionAPI):
         """
         取消归档分享
 
+        详情请参考
+        http://docs.teambition.com/wiki/posts#posts-unarchive
+
         :param id: 分享 ID
         :return: 返回的 JSON 数据包
         """
@@ -131,6 +157,9 @@ class Posts(TeambitionAPI):
     def update_tags(self, id, tag_ids):
         """
         更新分享标签
+
+        详情请参考
+        http://docs.teambition.com/wiki/posts#posts-update-tags
 
         :param id: 分享 ID
         :param tags: 标签 ID 列表
