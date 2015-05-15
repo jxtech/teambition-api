@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
+import copy
+
 import requests
 from furl import furl
 
@@ -54,14 +56,20 @@ class OAuth(TeambitionAPI):
         :param access_token: 可选，access_token
         :return: 返回的 JSON 数据包
         """
+        token = access_token or self.access_token
         headers = {
-            'access_token': access_token or self.access_token,
+            'Authorization': 'OAuth2 {0}'.format(token),
         }
+        old_token = copy.deepcopy(self.access_token)
+        self.access_token = None
+        valid = True
         try:
             res = self._get(
                 'api/applications/{0}/tokens/check'.format(self.client_id),
                 headers=headers
             )
-        except requests.HTTPError:
-            return False
-        return True
+        except requests.HTTPError as e:
+            valid = False
+
+        self.access_token = old_token
+        return valid

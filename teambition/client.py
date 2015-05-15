@@ -1,22 +1,82 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-import weakref
+import copy
 try:
     import simplejson as json
 except ImportError:
     import json
+
+import six
 import requests
 
 from teambition import api
+from teambition.api.base import APIDescriptor, TeambitionAPI
 from teambition.utils import JSONEncoder, JSONDecoder
 
 
-class Teambition(object):
+class APIClientMeta(type):
+
+    def __new__(cls, class_name, bases, attrs):
+        for b in bases:
+            if not hasattr(b, '_api_endpoints'):
+                continue
+
+            for k, v in b.__dict__.items():
+                if k in attrs:
+                    continue
+                if isinstance(v, APIDescriptor):
+                    attrs[k] = copy.deepcopy(v)
+
+        cls = super(APIClientMeta, cls).__new__(cls, class_name, bases, attrs)
+        cls._api_endpoints = {}
+
+        for name, api in cls.__dict__.items():
+            if isinstance(api, TeambitionAPI):
+                api.add_to_class(cls, name)
+
+        return cls
+
+
+class Teambition(six.with_metaclass(APIClientMeta)):
     """
     Teambition API 客户端
     """
 
     API_BASE_URL = 'https://api.teambition.com/'
+
+    # API endpoints
+    oauth = api.OAuth()
+    """:doc:`oauth`"""
+    projects = api.Projects()
+    """:doc:`projects`"""
+    tasklists = api.Tasklists()
+    """:doc:`tasklists`"""
+    stages = api.Stages()
+    """:doc:`stages`"""
+    tasks = api.Tasks()
+    """:doc:`tasks`"""
+    users = api.Users()
+    """:doc:`users`"""
+    organizations = api.Organizations()
+    """:doc:`organizations`"""
+    stagetemplates = api.StageTemplates()
+    """:doc:`stagetemplates`"""
+    teams = api.Teams()
+    """:doc:`teams`"""
+    subtasks = api.Subtasks()
+    """:doc:`subtasks`"""
+    messages = api.Messages()
+    """:doc:`messages`"""
+    posts = api.Posts()
+    """:doc:`posts`"""
+    collections = api.Collections()
+    """:doc:`collections`"""
+    works = api.Works()
+    """:doc:`works`"""
+    events = api.Events()
+    """:doc:`events`"""
+    tags = api.Tags()
+    """:doc:`tags`"""
 
     def __init__(self, client_id, client_secret, access_token=None):
         """
@@ -29,41 +89,6 @@ class Teambition(object):
         self.client_id = client_id
         self.client_secret = client_secret
         self._access_token = access_token
-
-        weak_self = weakref.proxy(self)
-        # API endpoints
-        self.oauth = api.OAuth(weak_self)
-        """:doc:`oauth`"""
-        self.projects = api.Projects(weak_self)
-        """:doc:`projects`"""
-        self.tasklists = api.Tasklists(weak_self)
-        """:doc:`tasklists`"""
-        self.stages = api.Stages(weak_self)
-        """:doc:`stages`"""
-        self.tasks = api.Tasks(weak_self)
-        """:doc:`tasks`"""
-        self.users = api.Users(weak_self)
-        """:doc:`users`"""
-        self.organizations = api.Organizations(weak_self)
-        """:doc:`organizations`"""
-        self.stagetemplates = api.StageTemplates(weak_self)
-        """:doc:`stagetemplates`"""
-        self.teams = api.Teams(weak_self)
-        """:doc:`teams`"""
-        self.subtasks = api.Subtasks(weak_self)
-        """:doc:`subtasks`"""
-        self.messages = api.Messages(weak_self)
-        """:doc:`messages`"""
-        self.posts = api.Posts(weak_self)
-        """:doc:`posts`"""
-        self.collections = api.Collections(weak_self)
-        """:doc:`collections`"""
-        self.works = api.Works(weak_self)
-        """:doc:`works`"""
-        self.events = api.Events(weak_self)
-        """:doc:`events`"""
-        self.tags = api.Tags(weak_self)
-        """:doc:`tags`"""
 
     def _request(self, method, endpoint, **kwargs):
         if not endpoint.startswith(('http://', 'https://')):
@@ -89,10 +114,13 @@ class Teambition(object):
             kwargs['data'] = body
 
         if 'headers' not in kwargs:
-            kwargs['headers'] = {
-                'Content-Type': 'application/json',
-                'Authorization': 'OAuth2 {0}'.format(self.access_token),
-            }
+            kwargs['headers'] = {}
+        if 'Content-Type' not in kwargs['headers']:
+            kwargs['headers']['Content-Type'] = 'application/json'
+        if 'Authorization' not in kwargs['headers']:
+            kwargs['headers']['Authorization'] = 'OAuth2 {0}'.format(
+                self.access_token
+            )
 
         res = requests.request(
             method=method,
