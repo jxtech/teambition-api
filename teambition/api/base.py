@@ -59,3 +59,8 @@ class TeambitionAPI(object):
     def add_to_class(self, klass, name):
         klass._api_endpoints[name] = self
         setattr(klass, name, APIDescriptor(self))
+
+    def __str__(self):
+        return '<{0}>'.format(self.__class__.__name__)
+
+    __repr__ = __str__
