@@ -11,6 +11,9 @@ class Works(TeambitionAPI):
         """
         获取文件信息
 
+        详情请参考
+        http://docs.teambition.com/wiki/works#works-get
+
         :param id: 可选，文件 ID
         :param parent_id: 可选，父级 ID
         :param page: 可选，当前页，默认为 1
@@ -37,6 +40,9 @@ class Works(TeambitionAPI):
                involve_members=None):
         """
         新建文件
+
+        详情请参考
+        http://docs.teambition.com/wiki/works#works-create
 
         :param parent_id: 所属目录 ID
         :param file_name: 文件名
@@ -68,19 +74,30 @@ class Works(TeambitionAPI):
         """
         赞文件
 
+        详情请参考
+        http://docs.teambition.com/wiki/works#works-like
+
         :param id: 文件 ID
         :return: 返回的 JSON 数据包
         """
         return self._post('api/works/{0}/like'.format(id))
 
-    def update(self, id, file_name):
+    def update(self, id, file_name, description=None):
         """
         更新文件
 
+        详情请参考
+        http://docs.teambition.com/wiki/works#works-update
+
         :param id: 文件 ID
         :param file_name: 文件名
+        :param description: 可选，描述
         :return: 返回的 JSON 数据包
         """
+        data = optionaldict(
+            fileName=file_name,
+            description=description
+        )
         return self._put(
             'api/works/{0}'.format(id),
             data=data
@@ -89,6 +106,9 @@ class Works(TeambitionAPI):
     def move(self, id, parent_id):
         """
         移动文件
+
+        详情请参考
+        http://docs.teambition.com/wiki/works#works-move
 
         :param id: 文件 ID
         :param parent_id: 新的目录 ID
@@ -105,6 +125,9 @@ class Works(TeambitionAPI):
         """
         删除文件
 
+        详情请参考
+        http://docs.teambition.com/wiki/works#works-delete
+
         :param id: 文件 ID
         :return: 返回的 JSON 数据包
         """
@@ -114,12 +137,15 @@ class Works(TeambitionAPI):
         """
         更新文件参与者
 
+        详情请参考
+        http://docs.teambition.com/wiki/works#works-update-involvemembers
+
         :param id: 文件 ID
         :param members: 参与者 ID 列表
         :return: 返回的 JSON 数据包
         """
         return self._put(
-            'api/works/{0}'.format(id),
+            'api/works/{0}/involveMembers'.format(id),
             data={
                 'involveMembers': members
             }
