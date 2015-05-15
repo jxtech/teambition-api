@@ -193,3 +193,22 @@ class Works(TeambitionAPI):
         :return: 返回的 JSON 数据包
         """
         return self._get('api/works/{0}/objectlinks'.format(id))
+
+    def create_objectlink(self, id, linked_id, linked_type):
+        """
+        关联对象
+
+        :param id: 文件 ID
+        :param linked_id: 关联对象 ID
+        :param linked_type: 关联对象类型
+        :return: 返回的 JSON 数据包
+        """
+        return self._post(
+            'api/objectlinks',
+            data={
+                '_parentId': id,
+                'parentType': 'work',
+                '_linkedId': linked_id,
+                'linkedType': linked_type
+            }
+        )
