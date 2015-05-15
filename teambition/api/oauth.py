@@ -79,7 +79,7 @@ class OAuth(TeambitionAPI):
                 'api/applications/{0}/tokens/check'.format(self.client_id),
                 headers=headers
             )
-        except requests.HTTPError as e:
+        except requests.HTTPError:
             valid = False
 
         self.access_token = old_token
