@@ -11,6 +11,9 @@ class Stages(TeambitionAPI):
         """
         获取任务分组的阶段列表
 
+        详情请参考
+        http://docs.teambition.com/wiki/stages#stages-get
+
         :param tasklist_id: 任务分组 ID
         :return: 返回的 JSON 数据包
         """
@@ -24,6 +27,9 @@ class Stages(TeambitionAPI):
     def create(self, name, tasklist_id, prev_id):
         """
         新建阶段
+
+        详情请参考
+        http://docs.teambition.com/wiki/stages#stages-create
 
         :param name: 阶段名称
         :param tasklist_id: 任务分组 ID
@@ -43,7 +49,10 @@ class Stages(TeambitionAPI):
         """
         删除阶段（流程模式下，最后一个阶段无法被删除）
 
-        :param id: 路径参数
+        详情请参考
+        http://docs.teambition.com/wiki/stages#stages-delete
+
+        :param id: 阶段 ID
         :return: 返回的 JSON 数据包
         """
         return self._delete('api/stages/{0}'.format(id))
@@ -52,7 +61,10 @@ class Stages(TeambitionAPI):
         """
         更新阶段
 
-        :param id: 路径参数
+        详情请参考
+        http://docs.teambition.com/wiki/stages#stages-update
+
+        :param id: 阶段 ID
         :param name: 阶段名称
         :param is_locked: 锁定最后一个阶段
         """
@@ -63,4 +75,33 @@ class Stages(TeambitionAPI):
         return self._put(
             'api/stages/{0}'.format(id),
             data=data
+        )
+
+    def get_tasks(self, id, executor_id=None, is_done=False, all=False,
+                  page=1, limit=30, **kwargs):
+        """
+        获取阶段下得任务列表
+
+        详情请参考
+        http://docs.teambition.com/wiki/stages#stages-get-tasks
+
+        :param id: 阶段 ID
+        :param executor_id: 可选，执行者 ID
+        :param is_done: 可选，是否已完成，默认为 False
+        :param all: 可选，所有类型，包括完成与未完成
+        :param page: 可选，页码，默认为 1
+        :param limit: 可选，每页数量，默认为 30，最大值为 1000
+        :return: 返回的 JSON 数据包
+        """
+        params = optionaldict(
+            isDone=is_done,
+            _executorId=executor_id,
+            all=all,
+            page=page,
+            limit=limit,
+            **kwargs
+        )
+        return self._get(
+            'api/stages/{0}/tasks'.format(id),
+            params=params
         )
