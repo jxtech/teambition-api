@@ -11,6 +11,9 @@ class Events(TeambitionAPI):
         """
         获取日程
 
+        详情请参考
+        http://docs.teambition.com/wiki/events#events-get
+
         :param id: 可选，日程 ID
         :param project_id: 可选，项目 ID
         :return: 返回的 JSON 数据包
@@ -27,6 +30,9 @@ class Events(TeambitionAPI):
                source_id=None, mode=None, visiable='members', tag_ids=None):
         """
         新建日程
+
+        详情请参考
+        http://docs.teambition.com/wiki/events#events-create
 
         :param project_id: 项目 ID
         :param title: 内容
@@ -67,6 +73,9 @@ class Events(TeambitionAPI):
         """
         删除日程
 
+        详情请参考
+        http://docs.teambition.com/wiki/events#events-delete
+
         :param id: 日程 ID
         :return: 返回的 JSON 数据包
         """
@@ -76,6 +85,9 @@ class Events(TeambitionAPI):
                location=None, status=None, reminders=None, content=None):
         """
         更新日程
+
+        详情请参考
+        http://docs.teambition.com/wiki/events#events-update
 
         :param id: 日程 ID
         :param title: 内容
@@ -104,6 +116,9 @@ class Events(TeambitionAPI):
         """
         赞日程
 
+        详情请参考
+        http://docs.teambition.com/wiki/events#events-like
+
         :param id: 日程 ID
         :return: 返回的 JSON 数据包
         """
@@ -112,6 +127,9 @@ class Events(TeambitionAPI):
     def archive(self, id):
         """
         归档日程
+
+        详情请参考
+        http://docs.teambition.com/wiki/events#events-archive
 
         :param id: 日程 ID
         :return: 返回的 JSON 数据包
@@ -122,6 +140,9 @@ class Events(TeambitionAPI):
         """
         取消归档日程
 
+        详情请参考
+        http://docs.teambition.com/wiki/events#events-unarchive
+
         :param id: 日程 ID
         :return: 返回的 JSON 数据包
         """
@@ -130,6 +151,9 @@ class Events(TeambitionAPI):
     def update_tags(self, id, tag_ids):
         """
         更新日程标签
+
+        详情请参考
+        http://docs.teambition.com/wiki/events#events-update-tags
 
         :param id: 日程 ID
         :param tag_ids: 标签 ID 列表
