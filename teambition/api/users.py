@@ -10,6 +10,10 @@ class Users(TeambitionAPI):
     def me(self):
         """
         获取个人信息
+
+        详情请参考
+        http://docs.teambition.com/wiki/me#me-get
+
         :return: 返回的 JSON 数据包
         """
         return self._get('api/users/me')
@@ -18,6 +22,9 @@ class Users(TeambitionAPI):
                location=None, phone=None, website=None):
         """
         更新个人信息
+
+        详情请参考
+        http://docs.teambition.com/wiki/me#me-update-info
 
         :param name: 可选，姓名
         :param avatar_url: 可选，头像地址
@@ -46,6 +53,9 @@ class Users(TeambitionAPI):
         """
         添加新邮箱
 
+        详情请参考
+        http://docs.teambition.com/wiki/me#me-update-emails
+
         :param email: 邮箱地址
         :return: 返回的 JSON 数据包
         """
@@ -59,6 +69,9 @@ class Users(TeambitionAPI):
     def update_preferences(self, id, notification):
         """
         更新通知设置
+
+        详情请参考
+        http://docs.teambition.com/wiki/me#me-update-notification
 
         :param id: 用户 ID
         :param notification: 新通知设置，dict 类型
@@ -75,6 +88,9 @@ class Users(TeambitionAPI):
         """
         发送邮箱验证邮件
 
+        详情请参考
+        http://docs.teambition.com/wiki/me#me-send-verify-email
+
         :param email_id: 邮箱唯一标识 ID，可以从 emails 属性中获得
         :return: 返回的 JSON 数据包
         """
@@ -84,6 +100,9 @@ class Users(TeambitionAPI):
         """
         删除关联邮箱
 
+        详情请参考
+        http://docs.teambition.com/wiki/me#me-delete-email
+
         :param email_id: 邮箱唯一标识 ID，可以从 emails 属性中获得
         :return: 返回的 JSON 数据包
         """
@@ -92,6 +111,9 @@ class Users(TeambitionAPI):
     def get_my_tasks(self, page=1, count=30):
         """
         获取执行者为我的任务
+
+        详情请参考
+        http://docs.teambition.com/wiki/me#me-tasks
 
         :param page: 可选，当前页码
         :param count: 可选，每页数量，默认为 30
@@ -103,6 +125,9 @@ class Users(TeambitionAPI):
         """
         获取我参与的任务
 
+        详情请参考
+        http://docs.teambition.com/wiki/me#me-involves
+
         :param page: 可选，当前页码
         :param count: 可选，每页数量，默认为 30
         :return: 返回的 JSON 数据包
@@ -112,6 +137,9 @@ class Users(TeambitionAPI):
     def get_today_count(self):
         """
         获取今日待处理事项总数
+
+        详情请参考
+        http://docs.teambition.com/wiki/me#me-today
 
         :return: 今日待处理事项数量
         """

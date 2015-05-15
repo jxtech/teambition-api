@@ -14,6 +14,9 @@ class OAuth(TeambitionAPI):
         """
         获取授权地址
 
+        详情请参考
+        http://docs.teambition.com/wiki/oauth2#oauth2-authorize
+
         :param redirect_uri: 授权回调地址
         :param state: 原样返回给客户端
         :param lang: 语言类型，可选 zh, en，默认为 zh
@@ -32,6 +35,9 @@ class OAuth(TeambitionAPI):
         """
         根据 code 获取 access_token
 
+        详情请参考
+        http://docs.teambition.com/wiki/oauth2#oauth2-access_token
+
         :param code: 授权完成返回的 code 参数值
         :param grant_type: 固定值为 code
         :return: access_token 值
@@ -49,9 +55,14 @@ class OAuth(TeambitionAPI):
         self._client._access_token = token
         return token
 
+    get_access_token = fetch_access_token  # Alias
+
     def check(self, access_token=None):
         """
         验证 access_token 是否合法
+
+        详情请参考
+        http://docs.teambition.com/wiki/oauth2#oauth2-check
 
         :param access_token: 可选，access_token
         :return: 返回的 JSON 数据包
