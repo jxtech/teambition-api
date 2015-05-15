@@ -11,6 +11,9 @@ class StageTemplates(TeambitionAPI):
         """
         获取用户自定义的阶段模板
 
+        详情请参考
+        http://docs.teambition.com/wiki/stages-template#stages-template-get
+
         :return: 返回的 JSON 数据包
         """
         return self._get('api/stagetemplates')
@@ -18,6 +21,9 @@ class StageTemplates(TeambitionAPI):
     def create(self, title, stages):
         """
         新建模板
+
+        详情请参考
+        http://docs.teambition.com/wiki/stages-template#stages-template-create
 
         :param title: 模板标题
         :param stages: 阶段名称列表，至少两个阶段
@@ -37,6 +43,9 @@ class StageTemplates(TeambitionAPI):
         """
         删除模板
 
+        详情请参考
+        http://docs.teambition.com/wiki/stages-template#stages-template-delete
+
         :param id: 路径参数
         :return: 返回的 JSON 数据包
         """
@@ -45,6 +54,9 @@ class StageTemplates(TeambitionAPI):
     def update(self, id, title=None, stages=None):
         """
         更新模板
+
+        详情请参考
+        http://docs.teambition.com/wiki/stages-template#stages-template-update
 
         :param id: 路径参数
         :param title: 可选，模板标题
