@@ -17,6 +17,7 @@ from teambition.api.works import Works  # NOQA
 from teambition.api.events import Events  # NOQA
 from teambition.api.tags import Tags  # NOQA
 from teambition.api.objectlinks import ObjectLinks  # NOQA
+from teambition.api.activities import Activities  # NOQA
 
 __all__ = [
     'OAuth',
@@ -36,4 +37,5 @@ __all__ = [
     'Events',
     'Tags',
     'ObjectLinks',
+    'Activities',
 ]

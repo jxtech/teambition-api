@@ -40,6 +40,7 @@ Welcome to teambition-api's documentation!
    events
    tags
    objectlinks
+   activities
 
 
 
