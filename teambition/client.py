@@ -77,6 +77,8 @@ class Teambition(six.with_metaclass(APIClientMeta)):
     """:doc:`events`"""
     tags = api.Tags()
     """:doc:`tags`"""
+    objectlinks = api.ObjectLinks()
+    """:doc:`objectlinks`"""
 
     def __init__(self, client_id, client_secret, access_token=None):
         """
