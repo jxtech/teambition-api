@@ -7,25 +7,19 @@ from teambition.api.base import TeambitionAPI
 
 class Tasks(TeambitionAPI):
 
-    def get(self, id, is_done=False, all=None,
-            page=1, count=30, due_date=None):
+    def get(self, id, detail_type=None):
         """
         获取任务
 
-        :param id: 路径参数
-        :param is_done: 可选，是否已完成，默认为 False
-        :param all: 可选，若提供此参数则抓取所以符合条件的任务
-        :param page: 可选，页码，与 count 配合使用
-        :param count: 可选，每页数据数量，默认为 30
-        :param due_date: 可选，截止日期
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-get-by-id
+
+        :param id: 任务 ID
+        :param detail_type: 可选值complete, 则会包含子任务详细信息
         :return: 返回的 JSON 数据包
         """
         params = optionaldict(
-            isDone=is_done,
-            all=all,
-            page=page,
-            count=count,
-            dueDate=due_date
+            detailType=detail_type
         )
         return self._get(
             'api/tasks/{0}'.format(id),
@@ -37,6 +31,9 @@ class Tasks(TeambitionAPI):
                recurrence=None, tag_ids=None):
         """
         创建任务
+
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-create
 
         :param content: 任务内容
         :param tasklist_id: 任务分组 ID
@@ -69,7 +66,10 @@ class Tasks(TeambitionAPI):
         """
         删除任务
 
-        :param id: 路径参数
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-delete
+
+        :param id: 任务 ID
         :return: 返回的 JSON 数据包
         """
         return self._delete('api/tasks/{0}'.format(id))
@@ -79,6 +79,9 @@ class Tasks(TeambitionAPI):
                priority=None, recurrence=None, is_done=None, note=None):
         """
         更新任务
+
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-update
 
         :param content: 任务内容
         :param tasklist_id: 任务分组 ID
@@ -112,7 +115,10 @@ class Tasks(TeambitionAPI):
         """
         赞任务
 
-        :param id: 路径参数
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-like
+
+        :param id: 任务 ID
         :return: 返回的 JSON 数据包
         """
         return self._post('api/tasks/{0}/like'.format(id))
@@ -121,7 +127,10 @@ class Tasks(TeambitionAPI):
         """
         复制任务
 
-        :param id: 路径参数，任务 ID
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-fork
+
+        :param id: 任务 ID，任务 ID
         :param stage_id: 目的阶段 ID
         :param do_link: 可选，是否关联复制出的任务，默认为 False
         :param do_linked: 可选，是否会被复制出的任务关联，默认为 False
@@ -141,7 +150,10 @@ class Tasks(TeambitionAPI):
         """
         移动任务
 
-        :param id: 路径参数
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-move
+
+        :param id: 任务 ID
         :param stage_id: 目的阶段 ID
         :return: 返回的 JSON 数据包
         """
@@ -156,7 +168,10 @@ class Tasks(TeambitionAPI):
         """
         归档任务
 
-        :param id: 路径参数
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-archive
+
+        :param id: 任务 ID
         :return: 返回的 JSON 数据包
         """
         return self._post('api/tasks/{0}/archive'.format(id))
@@ -165,7 +180,10 @@ class Tasks(TeambitionAPI):
         """
         取消归档任务
 
-        :param id: 路径参数
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-unarchive
+
+        :param id: 任务 ID
         :return: 返回的 JSON 数据包
         """
         return self._delete('api/tasks/{0}/archive'.format(id))
@@ -174,7 +192,10 @@ class Tasks(TeambitionAPI):
         """
         更新任务内子任务顺序
 
-        :param id: 路径参数
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-update-subtaskids
+
+        :param id: 任务 ID
         :param subtask_ids: 子任务 ID 列表
         :return: 返回的 JSON 数据包
         """
@@ -189,7 +210,10 @@ class Tasks(TeambitionAPI):
         """
         更新任务标签
 
-        :param id: 路径参数
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-update-tags
+
+        :param id: 任务 ID
         :param tag_ids: 标签 ID 列表
         :return: 返回的 JSON 数据包
         """
@@ -197,6 +221,96 @@ class Tasks(TeambitionAPI):
             'api/tasks/{0}/tagIds'.format(id),
             data={
                 'tagIds': tag_ids
+            }
+        )
+
+    def update_content(self, id, content):
+        """
+        更新任务内容
+
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-update_content
+
+        :param id: 任务 ID
+        :param content: 任务内容
+        :return: 返回的 JSON 数据包
+        """
+        return self._put(
+            'api/tasks/{0}/content'.format(id),
+            data={
+                'content': content
+            }
+        )
+
+    def update_note(self, id, note):
+        """
+        更新任务备注
+
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-update_note
+
+        :param id: 任务 ID
+        :param note: 任务备注
+        :return: 返回的 JSON 数据包
+        """
+        return self._put(
+            'api/tasks/{0}/note'.format(id),
+            data={
+                'note': note
+            }
+        )
+
+    def update_executor(self, id, executor_id):
+        """
+        更新任务执行者
+
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-update_executor
+
+        :param id: 任务 ID
+        :param executor_id: 执行者 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._put(
+            'api/tasks/{0}/_executorId'.format(id),
+            data={
+                '_executorId': executor_id
+            }
+        )
+
+    def update_status(self, id, is_done):
+        """
+        更新任务状态
+
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-update_status
+
+        :param id: 任务 ID
+        :param is_done: 是否已经完成
+        :return: 返回的 JSON 数据包
+        """
+        return self._put(
+            'api/tasks/{0}/isDone'.format(id),
+            data={
+                'isDone': is_done
+            }
+        )
+
+    def update_duedate(self, id, duedate):
+        """
+        更新截止日期
+
+        详情请参考
+        http://docs.teambition.com/wiki/tasks#tasks-update_duedate
+
+        :param id: 任务 ID
+        :param duedate: 截止日期，请使用 ISOString 格式，置空请传 None
+        :return: 返回的 JSON 数据包
+        """
+        return self._put(
+            'api/tasks/{0}/dueDate'.format(id),
+            data={
+                'dueDate': duedate
             }
         )
 
