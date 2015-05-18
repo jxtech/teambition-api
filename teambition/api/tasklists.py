@@ -154,3 +154,20 @@ class Tasklists(TeambitionAPI):
             'api/tasklists/{0}/tasks'.format(id),
             params=params
         )
+
+    def get_stages(self, id):
+        """
+        获取任务分组的阶段列表
+
+        详情请参考
+        http://docs.teambition.com/wiki/stages#stages-get
+
+        :param tasklist_id: 任务分组 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._get(
+            'api/stages',
+            params={
+                '_tasklistId': tasklist_id
+            }
+        )
