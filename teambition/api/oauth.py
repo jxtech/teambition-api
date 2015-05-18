@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-import copy
 
 import requests
 from furl import furl
@@ -73,7 +72,7 @@ class OAuth(TeambitionAPI):
         }
         valid = True
         try:
-            res = self._get(
+            self._get(
                 'api/applications/{0}/tokens/check'.format(self.client_id),
                 headers=headers
             )
