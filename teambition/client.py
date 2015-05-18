@@ -92,10 +92,6 @@ class Teambition(object):
         else:
             url = endpoint
 
-        if 'params' not in kwargs:
-            kwargs['params'] = {}
-        if 'access_token' not in kwargs['params'] and self.access_token:
-            kwargs['params']['access_token'] = self.access_token
         if isinstance(kwargs.get('data', ''), dict):
             body = json.dumps(
                 kwargs['data'],

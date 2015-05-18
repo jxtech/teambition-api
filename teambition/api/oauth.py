@@ -71,8 +71,6 @@ class OAuth(TeambitionAPI):
         headers = {
             'Authorization': 'OAuth2 {0}'.format(token),
         }
-        old_token = copy.deepcopy(self.access_token)
-        self.access_token = None
         valid = True
         try:
             res = self._get(
@@ -82,5 +80,4 @@ class OAuth(TeambitionAPI):
         except requests.HTTPError:
             valid = False
 
-        self.access_token = old_token
         return valid
