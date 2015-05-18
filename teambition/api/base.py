@@ -1,18 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-import weakref
-
-
-class APIDescriptor(object):
-
-    def __init__(self, api):
-        self.api = api
-
-    def __get__(self, instance, instance_type=None):
-        if instance is not None:
-            if self.api._client is None:
-                self.api._client = weakref.proxy(instance)
-        return self.api
 
 
 class TeambitionAPI(object):
@@ -55,10 +42,6 @@ class TeambitionAPI(object):
     @property
     def client_secret(self):
         return self._client.client_secret
-
-    def add_to_class(self, klass, name):
-        klass._api_endpoints[name] = self
-        setattr(klass, name, APIDescriptor(self))
 
     def __str__(self):
         return '<{0}>'.format(self.__class__.__name__)

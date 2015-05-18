@@ -10,34 +10,11 @@ import six
 import requests
 
 from teambition import api
-from teambition.api.base import APIDescriptor, TeambitionAPI
+from teambition.api.base import TeambitionAPI
 from teambition.utils import JSONEncoder, JSONDecoder
 
 
-class APIClientMeta(type):
-
-    def __new__(cls, class_name, bases, attrs):
-        for b in bases:
-            if not hasattr(b, '_api_endpoints'):
-                continue
-
-            for k, v in b.__dict__.items():
-                if k in attrs:
-                    continue
-                if isinstance(v, APIDescriptor):
-                    attrs[k] = copy.deepcopy(v)
-
-        cls = super(APIClientMeta, cls).__new__(cls, class_name, bases, attrs)
-        cls._api_endpoints = {}
-
-        for name, api in cls.__dict__.items():
-            if isinstance(api, TeambitionAPI):
-                api.add_to_class(cls, name)
-
-        return cls
-
-
-class Teambition(six.with_metaclass(APIClientMeta)):
+class Teambition(object):
     """
     Teambition API 客户端
     """
@@ -83,6 +60,15 @@ class Teambition(six.with_metaclass(APIClientMeta)):
     """:doc:`activities`"""
     webhooks = api.Webhooks()
     """:doc:`webhooks`"""
+
+    def __new__(cls, *args, **kwargs):
+        cls = super(Teambition, cls).__new__(cls, *args, **kwargs)
+        for name, api in cls.__class__.__dict__.items():
+            if isinstance(api, TeambitionAPI):
+                api = copy.deepcopy(api)
+                api._client = cls
+                setattr(cls, name, api)
+        return cls
 
     def __init__(self, client_id, client_secret, access_token=None):
         """
