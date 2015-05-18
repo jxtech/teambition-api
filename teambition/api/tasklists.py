@@ -18,7 +18,12 @@ class Tasklists(TeambitionAPI):
         :param project_id: 可选，项目 ID
         :return: 返回的 JSON 数据包
         """
-        return self._get('api/tasklists/{0}'.format(id))
+        assert id or project_id
+        if id:
+            endpoint = 'api/tasklists/{0}'.format(id)
+        elif project_id:
+            endpoint = 'api/projects/{0}/tasklists'.format(project_id)
+        return self._get(endpoint)
 
     def create(self, project_id, title, description=None):
         """

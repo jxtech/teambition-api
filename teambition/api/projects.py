@@ -478,3 +478,15 @@ class Projects(TeambitionAPI):
             end_date=end_date
         )
         return self._get(endpoint, params=params)
+
+    def get_tasklists(self, id):
+        """
+        获取项目任务分组列表
+
+        详情请参考
+        http://docs.teambition.com/wiki/tasklists#tasklists-get
+
+        :param id: 项目 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._get('api/projects/{0}/tasklists'.format(id))
