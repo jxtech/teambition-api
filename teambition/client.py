@@ -81,6 +81,8 @@ class Teambition(six.with_metaclass(APIClientMeta)):
     """:doc:`objectlinks`"""
     activities = api.Activities()
     """:doc:`activities`"""
+    webhooks = api.Webhooks()
+    """:doc:`webhooks`"""
 
     def __init__(self, client_id, client_secret, access_token=None):
         """

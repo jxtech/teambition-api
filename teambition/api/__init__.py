@@ -18,6 +18,7 @@ from teambition.api.events import Events  # NOQA
 from teambition.api.tags import Tags  # NOQA
 from teambition.api.objectlinks import ObjectLinks  # NOQA
 from teambition.api.activities import Activities  # NOQA
+from teambition.api.webhooks import Webhooks  # NOQA
 
 __all__ = [
     'OAuth',

@@ -329,3 +329,87 @@ class Organizations(TeambitionAPI):
             'api/organizations/{0}/members/{1}/events'.format(id, member_id),
             params=params
         )
+
+    def get_webhooks(self, id):
+        """
+        获取组织 Webhook 列表
+
+        :param id: 组织 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._get('api/organizations/{0}/hooks'.format(id))
+
+    def create_webhook(self, id, callback_url, active=True, events=None):
+        """
+        新建组织 webhook
+
+        :param id: 组织 ID
+        :param callback_url: 回调地址，Teambition通过HEAD请求进行测试, 有事件被触发将发送POST请求
+        :param active: 可选，是否激活，默认为 True
+        :param events: 可选，事件列表，默认为空
+        :return: 返回的 JSON 数据包
+        """
+        data = optionaldict(
+            callbackURL=callback_url,
+            active=active,
+            events=events
+        )
+        return self._post(
+            'api/organizations/{0}/hooks'.format(id),
+            data=data
+        )
+
+    def update_webhook(self, id, hook_id, callback_url=None, active=True,
+                       events=None, add_events=None, remove_events=None):
+        """
+        更新组织 webhook
+
+        :param id: 组织 ID
+        :param hook_id: webhook ID
+        :param callback_url: 可选，回调地址，Teambition通过HEAD请求进行测试, 有事件被触发将发送POST请求
+        :param active: 可选，是否激活，默认为 True
+        :param events: 可选，事件列表，默认为空
+        :param add_events: 可选，追加新的事件进去
+        :param remove_events: 可选，从原有的事件列表中移除
+        :return: 返回的 JSON 数据包
+        """
+        data = optionaldict(
+            callbackURL=callback_url,
+            active=active,
+            events=events,
+            addEvents=add_events,
+            removeEvents=remove_events
+        )
+        return self._put(
+            'api/organizations/{0}/hooks/{1}'.format(id, hook_id),
+            data=data
+        )
+
+    def delete_webhook(self, id, hook_id):
+        """
+        删除组织 webhook
+
+        :param id: 组织 ID
+        :param hook_id: webhook ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._delete(
+            'api/organizations/{0}/hooks/{1}'.format(id, hook_id)
+        )
+
+    def get_supported_webhooks(self):
+        """
+        获取组织支持的 webhook 列表
+
+        :return: 返回的 JSON 数据包
+        """
+        return self._get('api/organizations/webhooks')
+
+    def get_webhook_value_format(self, event):
+        """
+        获取组织 webhook 的返回值格式
+
+        :param event: 事件类型
+        :return: 返回的 JSON 数据包
+        """
+        return self._get('api/organizations/webhooks/{0}'.format(event))
