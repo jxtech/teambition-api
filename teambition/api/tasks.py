@@ -55,7 +55,7 @@ class Tasks(TeambitionAPI):
             dueDate=due_date,
             priority=priority,
             recurrence=recurrence,
-            tag_ids=tag_ids
+            tagIds=tag_ids
         )
         return self._post(
             'api/tasks',
