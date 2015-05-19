@@ -62,13 +62,13 @@ class Teambition(object):
     """:doc:`webhooks`"""
 
     def __new__(cls, *args, **kwargs):
-        cls = super(Teambition, cls).__new__(cls, *args, **kwargs)
-        for name, api in cls.__class__.__dict__.items():
+        self = super(Teambition, cls).__new__(cls)
+        for name, api in self.__class__.__dict__.items():
             if isinstance(api, TeambitionAPI):
                 api = copy.deepcopy(api)
-                api._client = cls
-                setattr(cls, name, api)
-        return cls
+                api._client = self
+                setattr(self, name, api)
+        return self
 
     def __init__(self, client_id, client_secret, access_token=None):
         """
