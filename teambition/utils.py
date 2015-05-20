@@ -37,7 +37,7 @@ class JSONDecoder(json.JSONDecoder):
                 continue
             try:
                 value = dateutil.parser.parse(value)
-            except ValueError:
+            except (TypeError, ValueError):
                 continue
             obj[key] = value
         return obj
