@@ -33,7 +33,7 @@ class JSONDecoder(json.JSONDecoder):
             if not isinstance(value, six.string_types):
                 continue
             # TODO: a better way to identify ISO datetime
-            if len(value) not in (10, 18, 22, 24, 25, 26):
+            if len(value) not in (10, 18, 20, 22, 24, 25, 26):
                 continue
             try:
                 value = dateutil.parser.parse(value)
