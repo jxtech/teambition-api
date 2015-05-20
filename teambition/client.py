@@ -12,6 +12,7 @@ import requests
 from teambition import api
 from teambition.api.base import TeambitionAPI
 from teambition.utils import JSONEncoder, JSONDecoder
+from teambition.exceptions import TeambitionException
 
 
 class Teambition(object):
@@ -115,7 +116,14 @@ class Teambition(object):
             url=url,
             **kwargs
         )
-        res.raise_for_status()
+        try:
+            res.raise_for_status()
+        except requests.RequestException as reqe:
+            raise TeambitionException(
+                request=reqe.request,
+                response=reqe.response
+            )
+
         result = res.json(cls=JSONDecoder)
         return result
 
