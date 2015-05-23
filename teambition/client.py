@@ -6,7 +6,6 @@ try:
 except ImportError:
     import json
 
-import six
 import requests
 
 from teambition import api
@@ -64,11 +63,11 @@ class Teambition(object):
 
     def __new__(cls, *args, **kwargs):
         self = super(Teambition, cls).__new__(cls)
-        for name, api in self.__class__.__dict__.items():
-            if isinstance(api, TeambitionAPI):
-                api = copy.deepcopy(api)
-                api._client = self
-                setattr(self, name, api)
+        for name, tb_api in self.__class__.__dict__.items():
+            if isinstance(tb_api, TeambitionAPI):
+                tb_api = copy.deepcopy(tb_api)
+                tb_api._client = self
+                setattr(self, name, tb_api)
         return self
 
     def __init__(self, client_id, client_secret, access_token=None):
@@ -116,10 +115,23 @@ class Teambition(object):
             url=url,
             **kwargs
         )
+        # Error handling, reraise RequestException as TeambitionException
         try:
             res.raise_for_status()
         except requests.RequestException as reqe:
+            code = -1
+            message = None
+            if reqe.response.text:
+                try:
+                    errinfo = json.loads(reqe.response.text)
+                    code = errinfo['code']
+                    message = errinfo['message']
+                except ValueError:
+                    pass
             raise TeambitionException(
+                code=code,
+                message=message,
+                client=self,
                 request=reqe.request,
                 response=reqe.response
             )
