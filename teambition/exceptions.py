@@ -8,7 +8,6 @@ class TeambitionException(RequestException):
 
     def __init__(self, code=-1, message=None, client=None, *args, **kwargs):
         super(TeambitionException, self).__init__(*args, **kwargs)
-        self.errno = code
         self.code = code
         self.message = message
         self.client = client
