@@ -60,6 +60,8 @@ class Teambition(object):
     """:doc:`activities`"""
     webhooks = api.Webhooks()
     """:doc:`webhooks`"""
+    bookkeepings = api.BookKeepings()
+    """:doc:`bookkeepings`"""
 
     def __new__(cls, *args, **kwargs):
         self = super(Teambition, cls).__new__(cls)
