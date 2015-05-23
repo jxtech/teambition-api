@@ -44,6 +44,7 @@ Welcome to teambition-api's documentation!
    webhooks
    bookkeepings
    entrycategories
+   entries
 
 
 Indices and tables
