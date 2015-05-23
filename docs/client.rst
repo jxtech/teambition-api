@@ -21,8 +21,16 @@ Teambition API 客户端
     try:
         tb.projects.get()
     except TeambitionException as e:
-        # do something useful
-        pass
+        # 错误码
+        print(e.code)
+        # 错误信息
+        print(e.message)
+        # 当前客户端实例
+        e.client
+        # 当前接口请求
+        e.request
+        # 当前接口响应
+        e.response
 
 .. module:: teambition.client
 
