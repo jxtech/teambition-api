@@ -43,7 +43,7 @@ Welcome to teambition-api's documentation!
    activities
    webhooks
    bookkeepings
-
+   entrycategories
 
 
 Indices and tables

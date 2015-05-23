@@ -20,6 +20,7 @@ from teambition.api.objectlinks import ObjectLinks  # NOQA
 from teambition.api.activities import Activities  # NOQA
 from teambition.api.webhooks import Webhooks  # NOQA
 from teambition.api.bookkeepings import BookKeepings  # NOQA
+from teambition.api.entrycategories import EntryCategories  # NOQA
 
 __all__ = [
     'OAuth',
@@ -41,4 +42,5 @@ __all__ = [
     'ObjectLinks',
     'Activities',
     'BookKeepings',
+    'EntryCategories',
 ]
