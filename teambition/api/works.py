@@ -53,6 +53,7 @@ class Works(TeambitionAPI):
         :param image_width: 可选，图片宽度
         :param image_height: 可选，图片高度
         :param involve_members: 可选
+        :return: 返回的 JSON 数据包
         """
         data = optionaldict(
             _parentId=parent_id,
@@ -211,4 +212,98 @@ class Works(TeambitionAPI):
                 '_linkedId': linked_id,
                 'linkedType': linked_type
             }
+        )
+
+    def get_versions(self, id):
+        """
+        获取文件关联的历史版本信息
+
+        详情请参考
+        http://docs.teambition.com/wiki/works-versions#works-versions-list
+
+        :param id: 文件 ID
+        :return: 历史版本列表
+        """
+        return self._get('api/works/{0}/versions'.format(id))
+
+    def get_version(self, id, version_id):
+        """
+        获取单个历史版本信息
+
+        详情请参考
+        http://docs.teambition.com/wiki/works-versions#works-versions-get
+
+        :param id: 文件 ID
+        :param version_id: 历史版本 ID
+        :return: 历史版本信息
+        """
+        return self._get('api/works/{0}/versions/{1}'.format(id, version_id))
+
+    def update_version(self, id, version_id, file_name=None, description=None):
+        """
+        获取单个历史版本信息
+
+        详情请参考
+        http://docs.teambition.com/wiki/works-versions#works-versions-update
+
+        :param id: 文件 ID
+        :param version_id: 历史版本 ID
+        :param file_name: 可选，文件名
+        :param description: 可选，描述
+        :return: 返回的 JSON 数据包
+        """
+        data = optionaldict(fileName=file_name, description=description)
+        return self._put(
+            'api/works/{0}/versions/{1}'.format(id, version_id),
+            data=data
+        )
+
+    def delete_version(self, id, version_id):
+        """
+        删除单个历史版本
+
+        详情请参考
+        http://docs.teambition.com/wiki/works-versions#works-versions-delete
+
+        :param id: 文件 ID
+        :param version_id: 历史版本 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._delete(
+            'api/works/{0}/versions/{1}'.format(id, version_id)
+        )
+
+    def create_version(self, id, file_name, file_size, file_type,
+                       file_category, file_key, image_width=None,
+                       image_height=None, involve_members=None):
+        """
+        新建文件
+
+        详情请参考
+        http://docs.teambition.com/wiki/works-versions#works-versions-post
+
+        :param id: 文件 ID
+        :param file_name: 文件名
+        :param file_size: 文件大小
+        :param file_type: 文件类型
+        :param file_category: 文件类别
+        :param file_key: 使用 striker 服务上传后可得
+        :param image_width: 可选，图片宽度
+        :param image_height: 可选，图片高度
+        :param involve_members: 可选
+        :return: 返回的 JSON 数据包
+        """
+        data = optionaldict(
+            fileName=file_name,
+            fileSize=file_size,
+            fileType=file_type,
+            fileCategory=file_category,
+            fileKey=file_key,
+            imageWidth=image_width,
+            imageHeight=image_height,
+            involveMembers=involve_members
+        )
+        return self._post(
+            'api/works/{0}/versions'.format(id),
+            data=data
         )
