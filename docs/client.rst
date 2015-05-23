@@ -12,6 +12,18 @@ Teambition API 客户端
     # tb.projects.xxx()
     # tb.tasks.xxx()
 
+
+接口调用发生错误时，可以捕获 ``TeambitionException``::
+
+    from teambition import Teambition, TeambitionException
+
+    tb = Teambition('key', 'secret', access_token='123456')
+    try:
+        tb.projects.get()
+    except TeambitionException as e:
+        # do something useful
+        pass
+
 .. module:: teambition.client
 
 .. autoclass:: Teambition
