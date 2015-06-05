@@ -384,3 +384,43 @@ class Tasks(TeambitionAPI):
                 'linkedType': linked_type
             }
         )
+
+    def link_task(self, id, linked_id):
+        """
+        关联任务
+
+        :param id: 任务 ID
+        :param linked_id: 关联任务 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self.create_objectlink(id, linked_id, 'task')
+
+    def link_post(self, id, linked_id):
+        """
+        关联分享
+
+        :param id: 任务 ID
+        :param linked_id: 关联分享 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self.create_objectlink(id, linked_id, 'post')
+
+    def link_event(self, id, linked_id):
+        """
+        关联日程
+
+        :param id: 任务 ID
+        :param linked_id: 关联日程 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self.create_objectlink(id, linked_id, 'event')
+
+    def link_work(self, id, linked_id):
+        """
+        关联文件
+
+        :param id: 任务 ID
+        :param linked_id: 关联文件 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self.create_objectlink(id, linked_id, 'work')
