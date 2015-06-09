@@ -175,20 +175,15 @@ class Events(TeambitionAPI):
         """
         return self._get('api/events/{0}/tags'.format(id))
 
-    def create_tag(self, id, name):
+    def remove_tag(self, id, tag_id):
         """
-        新建标签
+        移除标签
 
         :param id: 日程 ID
-        :param name: 标签名称
+        :param tag_id: 标签 ID
         :return: 返回的 JSON 数据包
         """
-        return self._post(
-            'api/events/{0}/tags'.format(id),
-            data={
-                'name': name
-            }
-        )
+        return self._delete('api/events/{0}/tags/{1}'.format(id, tag_id))
 
     def add_tag(self, id, tag_id):
         """
