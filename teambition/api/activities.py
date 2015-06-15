@@ -7,10 +7,22 @@ from teambition.api.base import TeambitionAPI
 
 class Activities(TeambitionAPI):
 
+    def get(self, object_id):
+        """
+        获取动态
+
+        :param object_id: 对象 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._get(
+            'api/activities',
+            params={'_boundToObjectId': object_id}
+        )
+
     def create(self, content, object_id, object_type,
                attachments=None, mentions=None):
         """
-        新建评论
+        新建动态
 
         详情请参考
         http://docs.teambition.com/wiki/activities#activities-comment
@@ -36,7 +48,7 @@ class Activities(TeambitionAPI):
 
     def update(self, id, content):
         """
-        更新评论
+        更新动态
 
         详情请参考
         http://docs.teambition.com/wiki/activities#activities-update_comment
@@ -54,7 +66,7 @@ class Activities(TeambitionAPI):
 
     def delete(self, id):
         """
-        删除评论
+        删除动态
 
         详情请参考
         http://docs.teambition.com/wiki/activities#activities-delete

@@ -268,3 +268,15 @@ class Posts(TeambitionAPI):
         :return: 返回的 JSON 数据包
         """
         return self.create_objectlink(id, linked_id, 'work')
+
+    def get_activities(self, id):
+        """
+        获取分享动态
+
+        :param id: 分享 ID
+        :return: 返回的 JSON 数据包
+        """
+        return self._get(
+            'api/activities',
+            params={'_boundToObjectId': id}
+        )
