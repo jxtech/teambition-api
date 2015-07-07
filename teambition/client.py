@@ -142,7 +142,7 @@ class Teambition(object):
                 response=reqe.response
             )
 
-        result = res.json(cls=JSONDecoder)
+        result = res.json(cls=JSONDecoder) if res.text else {}
         return result
 
     def get(self, endpoint, **kwargs):
