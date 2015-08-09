@@ -274,3 +274,41 @@ class Events(TeambitionAPI):
             'api/activities',
             params={'_boundToObjectId': id}
         )
+
+    def like_repeat_event(self, id, timestamp):
+        """
+        点赞重复日程
+
+        :param id: 日程 ID
+        :param timestamp: 时间戳
+        :return: 返回的 JSON 数据包
+        """
+        return self._post(
+            'api/events/{0}/like_repeat_event'.format(id),
+            data={
+                'timestamp': timestamp
+            }
+        )
+
+    def comments_repeat_event(self, id, content, timestamp,
+                              attachments=None, mentions=None):
+        """
+        评论重复日程
+
+        :param id: 日程 ID
+        :param content: 评论内容
+        :param timestamp: 时间戳
+        :param attachments: 可选，work(文件)ID列表
+        :param mentions: 可选，提及
+        :return: 返回的 JSON 数据包
+        """
+        data = optionaldict(
+            content=content,
+            timestamp=timestamp,
+            attachments=attachments,
+            mentions=mentions
+        )
+        return self._post(
+            'api/events/{0}/comments_repeat_event'.format(id),
+            data=data
+        )

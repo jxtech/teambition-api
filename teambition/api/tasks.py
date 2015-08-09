@@ -431,3 +431,32 @@ class Tasks(TeambitionAPI):
             'api/activities',
             params={'_boundToObjectId': id}
         )
+
+    def import_tasks(self, tasklist_id, tasks, stage_id=None, executor_id=None,
+                     involve_members=None, due_date=None, visiable=None):
+        """
+        批量导入任务
+
+        一次允许50条, 仅支持任务标题列表
+
+        :param tasklist_id: 任务分组 ID
+        :param tasks: 任务内容列表
+        :param stage_id: 可选，阶段 ID，默认分组的第一个阶段
+        :param executor_id: 可选，执行者 ID
+        :param involve_members: 可选，参与者列表
+        :param due_date: 可选，截止日期
+        :param visiable: 可选，可见状态
+        :return: 返回的 JSON 数据包
+        """
+        data = optionaldict(
+            tasks=tasks,
+            _stageId=stage_id,
+            _executorId=executor_id,
+            involveMembers=involve_members,
+            dueDate=due_date,
+            visiable=visiable,
+        )
+        return self._post(
+            'api/tasklists/{0}/import_tasks'.format(tasklist_id),
+            data=data
+        )
