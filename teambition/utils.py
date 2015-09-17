@@ -25,7 +25,7 @@ class JSONEncoder(json.JSONEncoder):
 class JSONDecoder(json.JSONDecoder):
 
     def __init__(self, *args, **kwargs):
-        kwargs[b'object_hook'] = self.datetime_object_hook
+        kwargs['object_hook'] = self.datetime_object_hook
         super(JSONDecoder, self).__init__(*args, **kwargs)
 
     def datetime_object_hook(self, obj):
