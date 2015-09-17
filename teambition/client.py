@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-import copy
+import sys
+import inspect
 try:
     import simplejson as json
 except ImportError:
@@ -12,6 +13,10 @@ from teambition import api
 from teambition.api.base import TeambitionAPI
 from teambition.utils import JSONEncoder, JSONDecoder
 from teambition.exceptions import TeambitionException
+
+
+def _is_api_endpoint(obj):
+    return isinstance(obj, TeambitionAPI)
 
 
 class Teambition(object):
@@ -69,10 +74,21 @@ class Teambition(object):
 
     def __new__(cls, *args, **kwargs):
         self = super(Teambition, cls).__new__(cls)
-        for name, tb_api in self.__class__.__dict__.items():
-            if isinstance(tb_api, TeambitionAPI):
-                tb_api = copy.deepcopy(tb_api)
-                tb_api._client = self
+        if sys.version_info[:2] == (2, 6):
+            # Python 2.6 inspect.gemembers bug workaround
+            # http://bugs.python.org/issue1785
+            for _class in cls.__mro__:
+                if issubclass(_class, Teambition):
+                    for name, tb_api in _class.__dict__.items():
+                        if isinstance(tb_api, TeambitionAPI):
+                            api_cls = type(tb_api)
+                            tb_api = api_cls(self)
+                            setattr(self, name, tb_api)
+        else:
+            api_endpoints = inspect.getmembers(self, _is_api_endpoint)
+            for name, tb_api in api_endpoints:
+                api_cls = type(tb_api)
+                tb_api = api_cls(self)
                 setattr(self, name, tb_api)
         return self
 
