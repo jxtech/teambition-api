@@ -14,7 +14,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='teambition',
-    version='0.1.11',
+    version='0.2.0',
     author='messense',
     author_email='messense@icloud.com',
     url='https://github.com/messense/teambition-api',

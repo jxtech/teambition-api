@@ -7,4 +7,4 @@ from teambition.exceptions import TeambitionException  # NOQA
 __all__ = ['Teambition', 'TeambitionException']
 
 __author__ = 'messense'
-__version__ = '0.1.11'
+__version__ = '0.2.0'
