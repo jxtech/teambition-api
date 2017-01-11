@@ -427,7 +427,7 @@ class Tasks(TeambitionAPI):
         :param id: 任务 ID
         :return: 返回的 JSON 数据包
         """
-        return self._get('api/tasks/{id}/activities'.format(**locals()))
+        return self._get('api/tasks/{0}/activities'.format(id))
 
     def import_tasks(self, tasklist_id, tasks, stage_id=None, executor_id=None,
                      involve_members=None, due_date=None, visiable=None):
